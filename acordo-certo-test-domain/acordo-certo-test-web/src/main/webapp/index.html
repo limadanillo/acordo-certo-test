@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Acordo Certo</title>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-resource.js"></script>
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/principal.controller.js"></script>
+<script type="text/javascript" src="app/empregado.service.js"></script>
+<script type="text/javascript" src="app/departamento.service.js"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body ng-app="acordoCertoApp" ng-controller="PrincipalController">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Departamentos</div>
+		<div class="panel-body">
+			<div class="col-md-4">
+				<form ng-submit="saveDepartamento()">
+					<div class="form-group">
+						<label for="departamentoNome">Nome Departamento</label> <input
+							type="text" ng-model="departamento.nome" class="form-control"
+							id="departamentoNome" placeholder="Nome Departamento">
+					</div>
+					<div class="form-group">
+						<label for="departamentoDescricao">Descricao Departamento</label>
+						<input type="text" ng-model="departamento.descricao"
+							class="form-control" id="departamentoDescricao"
+							placeholder="Descricao">
+					</div>
+
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+
+			</div>
+
+			<div class="table-responsive col-md-6">
+				<table class="table table-striped">
+					<tr>
+						<th>Nome</th>
+						<th>Descricao</th>
+						<th></th>
+					</tr>
+					<tr ng-repeat="departamento in departamentos">
+						<td>{{departamento.nome}}</td>
+						<td>{{departamento.descricao}}</td>
+						<td>
+							<button type="button" class="btn btn-default"
+								ng-click="updateDepartamentoInit(departamento)">
+								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default"
+								ng-click="deleteDepartamento(departamento)">
+								<span class="glyphicon glyphicon-remove-circle"
+									aria-hidden="true"></span>
+							</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Empregados</div>
+		<div class="panel-body">
+			<form class="col-md-4" ng-submit="saveEmpregado()">
+				<div class="form-group">
+					<label for="empregadoNome">Nome Empregado</label> <input type="text"
+						ng-model="empregado.nome" class="form-control" id="empregadoNome"
+						placeholder="Nome Empregado">
+				</div>
+				<div class="form-group">
+					<label for="empregadoSalary">Salario</label> <input type="text"
+						ng-model="empregado.salario" class="form-control"
+						id="empregadoSalary" placeholder="Salario">
+				</div>
+
+				<div class="form-group">
+					<label for="empregadoDepartamento">Departamento</label> <select
+						class="form-control" id="field_organization" name="organization"
+						ng-model="empregado.departamento"
+						ng-options="departamento as departamento.nome for departamento in departamentos track by departamento.id">
+					</select>
+				</div>
+
+				<button type="submit" class="btn btn-default">{{$updatingEmpregado
+					? 'Update' : 'Submit'}}</button>
+			</form>
+
+			<div class="table-responsive col-md-6">
+				<table class="table table-striped">
+					<tr>
+						<th>Nome</th>
+						<th>Salario</th>
+						<th>Departamentoo</th>
+						<th></th>
+					</tr>
+					<tr ng-repeat="empregado in empregados">
+						<td>{{empregado.nome}}</td>
+						<td>{{empregado.salario}}</td>
+						<td>{{empregado.departamento.nome}}</td>
+						<td>
+							<button type="button" class="btn btn-default"
+								ng-click="updateEmpregadoInit(empregado)">
+								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default"
+								ng-click="deleteEmpregado(empregado)">
+								<span class="glyphicon glyphicon-remove-circle"
+									aria-hidden="true"></span>
+							</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

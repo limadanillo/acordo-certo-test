@@ -3,8 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
   	
   	<artifactId>acordo-certo-test-domain</artifactId>
-	
-	<parent>
+    <packaging>pom</packaging>
+    <modules>
+        <module>acordo-certo-test-service</module>
+		<module>acordo-certo-test-web</module>
+	</modules>
+
+    <parent>
 		<groupId>br.com.acordocerto</groupId>
 		<artifactId>acordo-certo-test</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
